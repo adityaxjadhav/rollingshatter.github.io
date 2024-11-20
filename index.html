@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shutter Price Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Shutter Price Calculator</h1>
+        <button onclick="showAdminPanel()">Admin</button>
+    </header>
+
+    <!-- Admin Panel Section -->
+    <div id="adminPanel" style="display:none;">
+        <h2>Admin Panel</h2>
+        <label for="adminPassword">Enter Admin Password:</label>
+        <input type="password" id="adminPassword">
+        <button onclick="validatePassword()">Submit</button>
+
+        <!-- Admin options section -->
+        <div id="adminOptions" style="display:none;">
+            <h3>Update Product Prices</h3>
+            <label for="springPrice8">8 Inch Spring Price: ₹</label>
+            <input type="number" id="springPrice8" value="190"><br>
+
+            <label for="springPrice11">11 Inch Spring Price: ₹</label>
+            <input type="number" id="springPrice11" value="240"><br>
+
+            <label for="springPrice13">13 Inch Spring Price: ₹</label>
+            <input type="number" id="springPrice13" value="350"><br>
+
+            <label for="shatterPattiPrice">Shatter Patti Price: ₹</label>
+            <input type="number" id="shatterPattiPrice" value="78"><br>
+
+            <label for="bottomPrice">Bottom Price: ₹</label>
+            <input type="number" id="bottomPrice" value="75"><br>
+
+            <label for="bracketPrice">Bracket Price: ₹</label>
+            <input type="number" id="bracketPrice" value="72"><br>
+
+            <label for="coverPrice">Cover Price: ₹</label>
+            <input type="number" id="coverPrice" value="115"><br>
+
+            <label for="bracketUPrice">Bracket U Price: ₹</label>
+            <input type="number" id="bracketUPrice" value="20"><br>
+
+            <label for="slotPrice">Slot Price: ₹</label>
+            <input type="number" id="slotPrice" value="10"><br>
+
+            <label for="bottomFittingSetPrice">Bottom Fitting Set (without handle) Price: ₹</label>
+            <input type="number" id="bottomFittingSetPrice" value="190"><br>
+
+            <button onclick="saveUpdatedPrices()">Save Prices</button>
+        </div>
+    </div>
+
+    <!-- Billing Section -->
+    <div id="billing">
+        <h2>Billing</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Row for Spring -->
+                <tr>
+                    <td>
+                        <select id="springType" onchange="updateSpringPrice()">
+                            <option value="8">8 Inch Spring</option>
+                            <option value="11">11 Inch Spring</option>
+                            <option value="13">13 Inch Spring</option>
+                        </select>
+                    </td>
+                    <td id="springPrice">190</td>
+                    <td><input type="number" id="springQuantity" value="" onchange="calculateRowTotal('spring')"></td>
+                    <td id="springTotal">0</td>
+                </tr>
+                <!-- Row for Shatter Patti -->
+                <tr>
+                    <td>Shatter Patti</td>
+                    <td id="shatterPattiPrice">78</td>
+                    <td><input type="number" id="shatterPattiQuantity" value="" onchange="calculateRowTotal('shatterPatti')"></td>
+                    <td id="shatterPattiTotal">0</td>
+                </tr>
+                <!-- Row for Bottom -->
+                <tr>
+                    <td>Bottom</td>
+                    <td id="bottomPrice">75</td>
+                    <td><input type="number" id="bottomQuantity" value="" onchange="calculateRowTotal('bottom')"></td>
+                    <td id="bottomTotal">0</td>
+                </tr>
+                <!-- Row for Bracket -->
+                <tr>
+                    <td>Bracket</td>
+                    <td id="bracketPrice">72</td>
+                    <td><input type="number" id="bracketQuantity" value="" onchange="calculateRowTotal('bracket')"></td>
+                    <td id="bracketTotal">0</td>
+                </tr>
+                <!-- Row for Cover -->
+                <tr>
+                    <td>Cover</td>
+                    <td id="coverPrice">115</td>
+                    <td><input type="number" id="coverQuantity" value="" onchange="calculateRowTotal('cover')"></td>
+                    <td id="coverTotal">0</td>
+                </tr>
+                <!-- Row for Bracket U -->
+                <tr>
+                    <td>Bracket U</td>
+                    <td id="bracketUPrice">20</td>
+                    <td><input type="number" id="bracketUQuantity" value="" onchange="calculateRowTotal('bracketU')"></td>
+                    <td id="bracketUTotal">0</td>
+                </tr>
+                <!-- Row for Slot -->
+                <tr>
+                    <td>Slot</td>
+                    <td id="slotPrice">10</td>
+                    <td><input type="number" id="slotQuantity" value="" onchange="calculateRowTotal('slot')"></td>
+                    <td id="slotTotal">0</td>
+                </tr>
+                <!-- Row for Bottom Fitting Set -->
+                <tr>
+                    <td>Bottom Fitting Set (without handle)</td>
+                    <td id="bottomFittingSetPrice">190</td>
+                    <td><input type="number" id="bottomFittingSetQuantity" value="" onchange="calculateRowTotal('bottomFittingSet')"></td>
+                    <td id="bottomFittingSetTotal">0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="calculate-btn" onclick="calculateGrandTotal()">Calculate</button>
+
+        <div id="grandTotal" style="color: red; font-weight: bold;">Grand Total: ₹0</div>
+    </div>
+
+    <button onclick="printPage()">Print</button>
+
+    <footer>
+        <p>Contact Us: Email: info@audumbarshutter.com | Phone: 123-456-7890</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
