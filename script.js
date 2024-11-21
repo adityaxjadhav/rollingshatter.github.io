@@ -3,7 +3,8 @@ function showAdminPanel() {
     document.getElementById("adminPanel").style.display = 'block';
 }
 
-// Function to validate admin password
+// Function to validate admin password                 rewrite with fix
+
 function validatePassword() {
     const password = document.getElementById('adminPassword').value;
     if (password === "admin123") {
@@ -76,7 +77,7 @@ function loadPrices() {
     document.getElementById("bottomFittingSetPriceDisplay").innerText = prices.bottomFittingSetPrice;
 }
 
-// Function to update the spring price based on selection
+// Function to update the spring price based on the selected type
 function updateSpringPrice() {
     const springType = document.getElementById("springType").value;
     const prices = JSON.parse(localStorage.getItem('productPrices')) || {};
@@ -88,13 +89,24 @@ function updateSpringPrice() {
         price = prices.springPrice13 || 350;
     }
 
+    // Update the displayed price for the selected spring
     document.getElementById("springPrice").innerText = price;
+
+    // Recalculate the total for the spring row
+    calculateRowTotal("spring");
 }
 
 // Function to calculate total for each row
 function calculateRowTotal(product) {
     const quantity = parseInt(document.getElementById(product + "Quantity").value) || 0;
-    const price = parseInt(document.getElementById(product + "PriceDisplay").innerText) || 0;
+
+    // Handle spring separately due to dynamic price updates
+    let price = 0;
+    if (product === "spring") {
+        price = parseInt(document.getElementById("springPrice").innerText) || 0;
+    } else {
+        price = parseInt(document.getElementById(product + "PriceDisplay").innerText) || 0;
+    }
 
     const total = quantity * price;
     document.getElementById(product + "Total").innerText = total;
